@@ -122,7 +122,11 @@ function M.get_default_config()
                     vim.cmd("tabedit")
                 end
 
-                vim.api.nvim_set_current_buf(bufnr)
+                if vim.api.nvim_get_current_buf() == bufnr then
+                    set_position = true
+                else
+                    vim.api.nvim_set_current_buf(bufnr)
+                end
 
                 if set_position then
                     vim.api.nvim_win_set_cursor(0, {
